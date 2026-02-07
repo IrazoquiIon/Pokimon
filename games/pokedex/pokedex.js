@@ -1,8 +1,7 @@
 import { getPokemonById } from '../../api.js';
 
 const detailsContainer = document.getElementById('pokemonDetailsContainer');
-const allPokemonContainer = document.getElementById('allPokemonContainer');
-const pokemonCards = document.querySelectorAll('.pokemon-card');
+const allPokemonContainer = document.getElementById('pokemonContainer');
 const searchInput = document.getElementById('searchInput');
 
 // Fonction pour obtenir la couleur selon la valeur
@@ -119,11 +118,13 @@ const loadPokemonDetails = async (id) => {
     document.getElementById('backToList').addEventListener('click', () => {
         detailsContainer.style.display = 'none';
         allPokemonContainer.style.display = 'grid';
+        searchInput.style.display = 'block';
     });
 };
 
 searchInput.addEventListener('input', (e) => {
 
+    const pokemonCards = document.querySelectorAll('.pokemon-card');
     const searchTerm = e.target.value.toLowerCase();
     pokemonCards.forEach(card => {
         const pokemonName = card.querySelector('h3').textContent.toLowerCase();
