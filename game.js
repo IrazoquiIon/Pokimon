@@ -30,41 +30,40 @@ allPokemonBtn.addEventListener('click', async () => {
         pokemonCard.innerHTML = `
             <h3>${pokemon.name.fr}</h3>
             <img src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}" id="pokemon-image-${pokemon.id}" class="pokemon-image">
-            <div class="pokemon-types">${typesHTML}</div>
-            <h2>Stats :</h2>
-            <ul class="pokemon-stats">
-                <li>
-                    <span class="stat-label">HP:</span>
-                    <span class="stat-value">${pokemon.stats.hp}</span>
-                    <progress value="${pokemon.stats.hp}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.hp)}"></progress>
-                </li>
-                <li>
-                    <span class="stat-label">Attack:</span>
-                    <span class="stat-value">${pokemon.stats.atk}</span>
-                    <progress value="${pokemon.stats.atk}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.atk)}"></progress>
-                </li>
-                <li>
-                    <span class="stat-label">Defense:</span>
-                    <span class="stat-value">${pokemon.stats.def}</span>
-                    <progress value="${pokemon.stats.def}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.def)}"></progress>
-                </li>
-                <li>
-                    <span class="stat-label">Special Attack:</span>
-                    <span class="stat-value">${pokemon.stats.spe_atk}</span>
-                    <progress value="${pokemon.stats.spe_atk}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.spe_atk)}"></progress>
-                </li>
-                <li>
-                    <span class="stat-label">Special Defense:</span>
-                    <span class="stat-value">${pokemon.stats.spe_def}</span>
-                    <progress value="${pokemon.stats.spe_def}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.spe_def)}"></progress>
-                </li>
-                <li>
-                    <span class="stat-label">Speed:</span>
-                    <span class="stat-value">${pokemon.stats.vit}</span>
-                    <progress value="${pokemon.stats.vit}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.vit)}"></progress>
-                </li>
-            </ul>
-        `;
+            <div class="pokemon-types">${typesHTML}</div>`;
+            // <h2>Stats :</h2>
+            // <ul class="pokemon-stats">
+            //     <li>
+            //         <span class="stat-label">HP:</span>
+            //         <span class="stat-value">${pokemon.stats.hp}</span>
+            //         <progress value="${pokemon.stats.hp}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.hp)}"></progress>
+            //     </li>
+            //     <li>
+            //         <span class="stat-label">Attack:</span>
+            //         <span class="stat-value">${pokemon.stats.atk}</span>
+            //         <progress value="${pokemon.stats.atk}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.atk)}"></progress>
+            //     </li>
+            //     <li>
+            //         <span class="stat-label">Defense:</span>
+            //         <span class="stat-value">${pokemon.stats.def}</span>
+            //         <progress value="${pokemon.stats.def}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.def)}"></progress>
+            //     </li>
+            //     <li>
+            //         <span class="stat-label">Special Attack:</span>
+            //         <span class="stat-value">${pokemon.stats.spe_atk}</span>
+            //         <progress value="${pokemon.stats.spe_atk}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.spe_atk)}"></progress>
+            //     </li>
+            //     <li>
+            //         <span class="stat-label">Special Defense:</span>
+            //         <span class="stat-value">${pokemon.stats.spe_def}</span>
+            //         <progress value="${pokemon.stats.spe_def}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.spe_def)}"></progress>
+            //     </li>
+            //     <li>
+            //         <span class="stat-label">Speed:</span>
+            //         <span class="stat-value">${pokemon.stats.vit}</span>
+            //         <progress value="${pokemon.stats.vit}" max="255" class="stat-progress" style="--stat-color: ${getStatColor(pokemon.stats.vit)}"></progress>
+            //     </li>
+            // </ul>
         allPokemonContainer.appendChild(pokemonCard);
     }
 }
