@@ -20,53 +20,47 @@
                 <div class="card-icon">❓</div>
                 <h2>Qui est ce Pokémon ?</h2>
                 <p>Devine le Pokémon à partir de sa silhouette</p>
-                <button class="play-btn">Jouer</button>
+                <button class="play-btn" onclick='window.location.href="games/guess/guess.html"'>Jouer</button>
             </div>
 
             <div class="game-card" data-game="battle">
                 <div class="card-icon">⚔️</div>
                 <h2>Combat Pokémon</h2>
                 <p>Affronte des Pokémon dans des combats épiques</p>
-                <button class="play-btn">Jouer</button>
+                <button class="play-btn" onclick='window.location.href="games/battle/battle.html"'>Jouer</button>
             </div>
 
             <div class="game-card" data-game="higher-lower">
                 <div class="card-icon">📊</div>
                 <h2>Plus ou Moins</h2>
                 <p>Devine si le prochain sera plus grand ou plus fort</p>
-                <button class="play-btn">Jouer</button>
+                <button class="play-btn" onclick='window.location.href="games/higher_lower/higher_lower.html"'>Jouer</button>
             </div>
 
             <div class="game-card" data-game="memory">
                 <div class="card-icon">🧠</div>
                 <h2>Memory Pokémon</h2>
                 <p>Retrouve les paires de Pokémon identiques</p>
-                <button class="play-btn">Jouer</button>
+                <button class="play-btn" onclick='window.location.href="games/memory/memory.html"'>Jouer</button>
             </div>
 
             <div class="game-card" data-game="quiz">
                 <div class="card-icon">📚</div>
                 <h2>Pokédex Quiz</h2>
                 <p>Teste tes connaissances sur les Pokémon</p>
-                <button class="play-btn">Jouer</button>
+                <button class="play-btn" onclick='window.location.href="games/quiz/quiz.html"'>Jouer</button>
             </div>
 
             <div class="game-card" data-game="pokedex">
                 <div class="card-icon">📖</div>
                 <h2>Pokédex</h2>
                 <p>Pour tout voir</p>
-                <button class="play-btn" id="allPokemonBtn">Tous les pokimon</button>
+                <button class="play-btn" id="allPokemonBtn" onclick='window.location.href="games/pokedex/pokedex.html"'>Jouer</button>
             </div>
-        </div>
-
-        <div id="game-container" class="game-container hidden">
-            <button class="back-btn" id="backBtn">← Retour au menu</button>
-            <div id="game-content"></div>
         </div>
     </div>
     
-    <div class="containerPokemons" id="allPokemonContainer"></div>
-
+    
     <script type="module" src="game.js"></script>
 </body>
 
