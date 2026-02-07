@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokimon - Collection de Jeux</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎮 POKIMON GAMES 🎮</h1>
+            <p class="subtitle">Choisis ton aventure Pokémon !</p>
+        </header>
+
+        <div class="games-grid" id="menu">
+            <div class="game-card" data-game="guess">
+                <div class="card-icon">❓</div>
+                <h2>Qui est ce Pokémon ?</h2>
+                <p>Devine le Pokémon à partir de sa silhouette</p>
+                <button class="play-btn">Jouer</button>
+            </div>
+
+            <div class="game-card" data-game="battle">
+                <div class="card-icon">⚔️</div>
+                <h2>Combat Pokémon</h2>
+                <p>Affronte des Pokémon dans des combats épiques</p>
+                <button class="play-btn">Jouer</button>
+            </div>
+
+            <div class="game-card" data-game="higher-lower">
+                <div class="card-icon">📊</div>
+                <h2>Plus ou Moins</h2>
+                <p>Devine si le prochain sera plus grand ou plus fort</p>
+                <button class="play-btn">Jouer</button>
+            </div>
+
+            <div class="game-card" data-game="memory">
+                <div class="card-icon">🧠</div>
+                <h2>Memory Pokémon</h2>
+                <p>Retrouve les paires de Pokémon identiques</p>
+                <button class="play-btn">Jouer</button>
+            </div>
+
+            <div class="game-card" data-game="quiz">
+                <div class="card-icon">📚</div>
+                <h2>Pokédex Quiz</h2>
+                <p>Teste tes connaissances sur les Pokémon</p>
+                <button class="play-btn">Jouer</button>
+            </div>
+        </div>
+
+        <div id="game-container" class="game-container hidden">
+            <button class="back-btn" id="backBtn">← Retour au menu</button>
+            <div id="game-content"></div>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>
