@@ -15,17 +15,17 @@ const getStatColor = (value) => {
 };
 
 // On définit la taille des paquets (ex: 50 par 50)
-const BATCH_SIZE = 50;
+const paquet = 50;
 
 const loadAllPokemon = async () => {
     // On affiche le texte de chargement au début
     loadingText.style.display = 'block';
 
-    for (let i = 1; i <= 1025; i += BATCH_SIZE) {
+    for (let i = 1; i <= 1025; i += paquet) {
         const promises = [];
         
         // On prépare un petit lot (ex: de 1 à 50, puis 51 à 100...)
-        for (let id = i; id < i + BATCH_SIZE && id <= 1025; id++) {
+        for (let id = i; id < i + paquet && id <= 1025; id++) {
             promises.push(getPokemonById(id));
         }
 
