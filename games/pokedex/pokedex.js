@@ -3,6 +3,7 @@ import { getPokemonById } from '../../api.js';
 const detailsContainer = document.getElementById('pokemonDetailsContainer');
 const allPokemonContainer = document.getElementById('pokemonContainer');
 const searchInput = document.getElementById('searchInput');
+const loadingText = document.querySelector('.loading');
 
 // Fonction pour obtenir la couleur selon la valeur
 const getStatColor = (value) => {
@@ -13,47 +14,60 @@ const getStatColor = (value) => {
     return '#22c55e'; // Vert foncé
 };
 
-// Fonction async pour charger tous les Pokémon
+// On définit la taille des paquets (ex: 50 par 50)
+const BATCH_SIZE = 50;
+
 const loadAllPokemon = async () => {
-    // 1. Créer un tableau de promesses pour les 151 premiers (ou plus)
-    // On commence par 151 pour que ce soit instantané, tu pourras augmenter après
-    const promises = [];
-    for (let id = 1; id <= 1025; id++) {
-        promises.push(getPokemonById(id));
-    }
+    // On affiche le texte de chargement au début
+    loadingText.style.display = 'block';
 
-    // 2. Attendre que TOUTES les requêtes reviennent en même temps
-    const allPokemons = await Promise.all(promises);
+    for (let i = 1; i <= 1025; i += BATCH_SIZE) {
+        const promises = [];
+        
+        // On prépare un petit lot (ex: de 1 à 50, puis 51 à 100...)
+        for (let id = i; id < i + BATCH_SIZE && id <= 1025; id++) {
+            promises.push(getPokemonById(id));
+        }
 
-    // 3. Une fois qu'on a tout, on affiche tout d'un coup
-    allPokemons.forEach((pokemon, index) => {
-        if (!pokemon) return;
+        // On attend juste ce petit lot
+        const pokemons = await Promise.all(promises);
 
-        const id = index + 1;
-        const pokemonCard = document.createElement('div');
-        pokemonCard.classList.add('pokemon-card');
-        pokemonCard.dataset.pokemonId = id;
-        pokemonCard.style.cursor = 'pointer';
-
-        const typesHTML = pokemon.types.map(type =>
-            `<img src="${type.image}" alt="${type.name}" class="pokemon-type">`
-        ).join('');
-
-        pokemonCard.innerHTML = `
-            <h3 class="pokemon-name">${pokemon.name.fr}</h3>
-            <img src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}" class="pokemon-image">
-            <div class="pokemon-types">${typesHTML}</div>
-        `;
-
-        pokemonCard.addEventListener('click', () => {
-            loadPokemonDetails(id);
+        // On affiche ce lot immédiatement
+        pokemons.forEach((pokemon) => {
+            if (!pokemon) return;
+            renderPokemonCard(pokemon); // On utilise une fonction séparée pour la clarté
         });
 
-        allPokemonContainer.appendChild(pokemonCard);
+        // Une fois que le PREMIER lot est affiché, on peut cacher le texte de chargement
+        if (i === 1) {
+            loadingText.style.display = 'none';
+        }
+    }
+}
+
+// Fonction pour créer une carte (extraite pour plus de propreté)
+const renderPokemonCard = (pokemon) => {
+    const pokemonCard = document.createElement('div');
+    pokemonCard.classList.add('pokemon-card');
+    pokemonCard.style.cursor = 'pointer';
+
+    const typesHTML = pokemon.types.map(type =>
+        `<img src="${type.image}" alt="${type.name}" class="pokemon-type">`
+    ).join('');
+
+    pokemonCard.innerHTML = `
+        <h3 class="pokemon-name">${pokemon.name.fr}</h3>
+        <img src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}" class="pokemon-image">
+        <div class="pokemon-types">${typesHTML}</div>
+    `;
+
+    pokemonCard.addEventListener('click', () => {
+        loadPokemonDetails(pokemon.pokedex_id);
     });
+
+    allPokemonContainer.appendChild(pokemonCard);
 };
 
-// Lancer le chargement au chargement de la page
 loadAllPokemon();
 
 const loadPokemonDetails = async (id) => {
