@@ -286,3 +286,19 @@ body {
     background: var(--stat-color);
     border-radius: 10px;
 }
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.searchInput {
+    width: 300px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
