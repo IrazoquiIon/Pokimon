@@ -1,7 +1,7 @@
 // Fonction pour récupérer un Pokémon spécifique par son ID
 const getPokemonById = async (id) => {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const response = await fetch(`https://tyradex.vercel.app/api/v1/pokemon/${id}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
