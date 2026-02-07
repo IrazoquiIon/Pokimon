@@ -215,10 +215,11 @@ body {
 
 .containerPokemons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 20px;
     margin-top: 30px;
 }
+
 
 .pokemon-image {
     width: 100px;
@@ -236,6 +237,51 @@ body {
 .pokemon-stats {
     margin-top: 10px;
     font-size: 0.9rem;
-    color: #555;
     list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.pokemon-stats li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 10px;
+}
+
+.stat-label {
+    min-width: 120px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.stat-value {
+    min-width: 35px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.stat-progress {
+    flex: 1;
+    height: 20px;
+    border-radius: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.stat-progress::-webkit-progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+}
+
+.stat-progress::-webkit-progress-value {
+    background: var(--stat-color);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.stat-progress::-moz-progress-bar {
+    background: var(--stat-color);
+    border-radius: 10px;
 }
