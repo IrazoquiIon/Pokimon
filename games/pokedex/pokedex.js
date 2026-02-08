@@ -118,6 +118,107 @@ const loadPokemonDetails = async (id) => {
         .map(talent => `${talent.name}${talent.tc ? ' (TC)' : ''}`)
         .join(', ');
 
+    // NOMS INTERNATIONAUX 
+    const internationalNames = document.getElementById('internationalNames');
+    if (internationalNames) {
+        internationalNames.innerHTML = `
+            <div class="name-item">
+                <span class="flag">FR</span>
+                <span class="name-lang">Français:</span>
+                <span class="name-value">${pokemon.name.fr}</span>
+            </div>
+            <div class="name-item">
+                <span class="flag">EN</span>
+                <span class="name-lang">English:</span>
+                <span class="name-value">${pokemon.name.en}</span>
+            </div>
+            <div class="name-item">
+                <span class="flag">JP</span>
+                <span class="name-lang">日本語:</span>
+                <span class="name-value">${pokemon.name.jp}</span>
+            </div>
+        `;
+    }
+
+    // INFORMATIONS ADDITIONNELLES 
+    const additionalInfo = document.getElementById('additionalInfo');
+    if (additionalInfo) {
+        additionalInfo.innerHTML = `
+            <div class="info-item">
+                <strong>Génération:</strong>
+                <span>${pokemon.generation}</span>
+            </div>
+            <div class="info-item">
+                <strong>Taux de capture:</strong>
+                <span>${pokemon.catch_rate}</span>
+            </div>
+            <div class="info-item">
+                <strong>XP Niveau 100:</strong>
+                <span>${pokemon.level_100.toLocaleString('fr-FR')}</span>
+            </div>
+            <div class="info-item">
+                <strong>Groupes d'œufs:</strong>
+                <span>${pokemon.egg_groups.join(', ')}</span>
+            </div>
+            <div class="info-item">
+                <strong>Sexe:</strong>
+                <span>♂ ${pokemon.sexe.male}% / ♀ ${pokemon.sexe.female}%</span>
+            </div>
+        `;
+    }
+
+    // ========== RÉSISTANCES ET FAIBLESSES ==========
+    const resistancesContainer = document.getElementById('resistancesContainer');
+    if (resistancesContainer) {
+        // Séparer par catégories
+        const immunities = pokemon.resistances.filter(r => r.multiplier === 0);
+        const resistances = pokemon.resistances.filter(r => r.multiplier < 1 && r.multiplier > 0);
+        const weaknesses = pokemon.resistances.filter(r => r.multiplier > 1);
+
+        let resistancesHTML = '';
+
+        if (immunities.length > 0) {
+            resistancesHTML += '<div class="resistance-section"><h4>Immunités (0x)</h4><div class="resistance-grid">';
+            immunities.forEach(r => {
+                resistancesHTML += `
+                    <div class="resistance-item immunity">
+                        <span class="resistance-type">${r.name}</span>
+                        <span class="resistance-multiplier">x${r.multiplier}</span>
+                    </div>
+                `;
+            });
+            resistancesHTML += '</div></div>';
+        }
+
+        if (resistances.length > 0) {
+            resistancesHTML += '<div class="resistance-section"><h4>Résistances</h4><div class="resistance-grid">';
+            resistances.forEach(r => {
+                resistancesHTML += `
+                    <div class="resistance-item resistance">
+                        <span class="resistance-type">${r.name}</span>
+                        <span class="resistance-multiplier">×${r.multiplier}</span>
+                    </div>
+                `;
+            });
+            resistancesHTML += '</div></div>';
+        }
+
+        if (weaknesses.length > 0) {
+            resistancesHTML += '<div class="resistance-section"><h4>Faiblesses</h4><div class="resistance-grid">';
+            weaknesses.forEach(r => {
+                resistancesHTML += `
+                    <div class="resistance-item weakness">
+                        <span class="resistance-type">${r.name}</span>
+                        <span class="resistance-multiplier">×${r.multiplier}</span>
+                    </div>
+                `;
+            });
+            resistancesHTML += '</div></div>';
+        }
+
+        resistancesContainer.innerHTML = resistancesHTML;
+    }
+
     // Mettre à jour les stats
     detailStats.innerHTML = '';
     const stats = [
@@ -253,6 +354,19 @@ const loadPokemonDetails = async (id) => {
         });
     } else {
         megaEvolutionContainer.style.display = 'none';
+    }
+
+    // GIGAMAX
+    const gmaxContainer = document.getElementById('gmaxContainer');
+    if (gmaxContainer) {
+        if (pokemon.sprites.gmax) {
+            gmaxContainer.style.display = 'block';
+            const gmaxImage = document.getElementById('gmaxImage');
+            gmaxImage.src = pokemon.sprites.gmax.regular;
+            gmaxImage.alt = `${pokemon.name.fr} Gigamax`;
+        } else {
+            gmaxContainer.style.display = 'none';
+        }
     }
 
     // Mettre à jour l'image shiny
